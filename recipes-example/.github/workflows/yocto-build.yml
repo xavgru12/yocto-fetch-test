@@ -1,0 +1,39 @@
+name: Yocto Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            gawk wget git diffstat unzip texinfo gcc \
+            build-essential chrpath socat cpio python3 \
+            python3-pip python3-pexpect xz-utils debianutils \
+            iputils-ping python3-git python3-jinja2 \
+            libegl1-mesa libsdl1.2-dev pylint xterm zstd
+
+      - name: Clone Poky
+        run: |
+          git clone -b kirkstone git://git.yoctoproject.org/poky
+
+      - name: Setup build env
+        run: |
+          cd poky
+          source oe-init-build-env build
+
+          bitbake-layers add-layer ../../meta-my-layer
+
+          bitbake my-git-package
+        shell: bash
