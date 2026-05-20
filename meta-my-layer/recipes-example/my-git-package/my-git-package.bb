@@ -7,6 +7,8 @@ SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
+BB_ENV_PASSTHROUGH_ADDITIONS += "http_proxy https_proxy HTTP_PROXY HTTPS_PROXY"
+
 do_swift_checkout() {
     cd ${S}
 
