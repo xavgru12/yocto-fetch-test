@@ -15,7 +15,7 @@ do_swift_checkout() {
     # extra fetch/update
     git fetch
 }
-
+do_swift_checkout[network] = "1"
 addtask swift_checkout after do_unpack before do_patch
 
 do_compile() {
