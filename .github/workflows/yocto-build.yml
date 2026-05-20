@@ -35,5 +35,5 @@ jobs:
 
           bitbake-layers add-layer ../../meta-my-layer
 
-          bitbake my-git-package
+          bitbake my-git-package -c swift_checkout --no-setscene
         shell: bash
