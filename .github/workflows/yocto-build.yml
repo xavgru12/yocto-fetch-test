@@ -26,7 +26,7 @@ jobs:
 
       - name: Clone Poky
         run: |
-          git clone -b kirkstone git://git.yoctoproject.org/poky
+          git clone -b kirkstone https://github.com/yoctoproject/poky.git
 
       - name: Setup build env
         run: |
